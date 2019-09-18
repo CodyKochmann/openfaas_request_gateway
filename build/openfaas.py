@@ -11,6 +11,7 @@ import cherrypy, requests
 
 log.root.setLevel(log.DEBUG)
 
+
 if 'OPENFAAS_URL' in os.environ:
     OPENFAAS_URL = os.environ['OPENFAAS_URL']
 else:
@@ -65,4 +66,12 @@ cherrypy.config.update({
     'server.socket_port': 8080
 })
 
-cherrypy.quickstart(RequestGateway())
+if __name__ == '__main__':
+    cherrypy.quickstart(RequestGateway())
+#    import sys
+#    import threading
+#    sys.setrecursionlimit(100)
+#    threading.stack_size(0x200000000)
+#    t = threading.Thread(target=cherrypy.quickstart(RequestGateway()))
+#    t.start()
+#    t.join()
